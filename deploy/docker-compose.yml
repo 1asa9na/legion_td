@@ -1,0 +1,47 @@
+# From the repo root, with .env filled from .env.example:
+# docker compose --env-file .env -f deploy/docker-compose.yml up --build
+name: legion-td
+
+services:
+  server:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.server
+    environment:
+      PORT: "2567"
+      BOT_TOKEN: ${BOT_TOKEN:-}
+      WEBAPP_URL: ${WEBAPP_URL:-}
+    restart: unless-stopped
+    expose:
+      - "2567"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:2567/health').then((r)=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  web:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.web
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN:?set DOMAIN}
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - server
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:

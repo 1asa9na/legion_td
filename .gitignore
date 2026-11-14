@@ -1,0 +1,13 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.env
+*.log
+
+# Warcraft 3 map extract, kept locally as reference
+(attributes)
+(listfile)
+war3map*
+war3mapImported/
+ReplaceableTextures/
+LoadingScreen*

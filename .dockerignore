@@ -1,0 +1,12 @@
+node_modules
+**/dist
+.git
+.github
+.env
+*.log
+(attributes)
+(listfile)
+war3map*
+war3mapImported
+ReplaceableTextures
+LoadingScreen*

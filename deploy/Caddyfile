@@ -1,0 +1,22 @@
+{$DOMAIN} {
+	encode gzip
+
+	@ws header Connection *Upgrade*
+	handle @ws {
+		reverse_proxy server:2567
+	}
+
+	handle /health {
+		reverse_proxy server:2567
+	}
+
+	handle /matchmake/* {
+		reverse_proxy server:2567
+	}
+
+	handle {
+		root * /srv
+		try_files {path} /index.html
+		file_server
+	}
+}

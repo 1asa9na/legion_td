@@ -1,0 +1,48 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure SSH
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Sync and restart
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          DOMAIN: ${{ secrets.DOMAIN }}
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          WEBAPP_URL: ${{ secrets.WEBAPP_URL }}
+        run: |
+          ssh -i ~/.ssh/id_ed25519 "${SSH_USER}@${SSH_HOST}" "mkdir -p legion-td"
+          rsync -az --delete \
+            --exclude node_modules \
+            --exclude .git \
+            --exclude .env \
+            --exclude 'war3map*' \
+            --exclude war3mapImported \
+            --exclude ReplaceableTextures \
+            --exclude 'LoadingScreen*' \
+            --exclude '(attributes)' \
+            --exclude '(listfile)' \
+            -e "ssh -i ~/.ssh/id_ed25519" \
+            ./ "${SSH_USER}@${SSH_HOST}:legion-td/"
+          printf 'DOMAIN=%s\nBOT_TOKEN=%s\nWEBAPP_URL=%s\n' \
+            "$DOMAIN" "$BOT_TOKEN" "$WEBAPP_URL" > /tmp/legion.env
+          scp -i ~/.ssh/id_ed25519 /tmp/legion.env "${SSH_USER}@${SSH_HOST}:legion-td/.env"
+          ssh -i ~/.ssh/id_ed25519 "${SSH_USER}@${SSH_HOST}" \
+            "cd legion-td && docker compose --env-file .env -f deploy/docker-compose.yml up -d --build"
