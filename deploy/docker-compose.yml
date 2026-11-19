@@ -1,5 +1,10 @@
+# The server already runs Caddy on 80/443. This stack does not publish those ports.
+# Attach that Caddy to the external network `edge` once:
+#   docker network connect edge <caddy-container>
+# and add deploy/host.caddy to its config. The web container is reachable there
+# as legion-td-web.
 # From the repo root, with .env filled from .env.example:
-# docker compose --env-file .env -f deploy/docker-compose.yml up --build
+#   docker compose --env-file .env -f deploy/docker-compose.yml up --build
 name: legion-td
 
 services:
@@ -30,18 +35,24 @@ services:
     build:
       context: ..
       dockerfile: deploy/Dockerfile.web
-    ports:
-      - "80:80"
-      - "443:443"
-    environment:
-      DOMAIN: ${DOMAIN:?set DOMAIN}
-    volumes:
-      - caddy_data:/data
-      - caddy_config:/config
-    depends_on:
-      - server
     restart: unless-stopped
+    expose:
+      - "80"
+    depends_on:
+      server:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    networks:
+      default: {}
+      edge:
+        aliases:
+          - legion-td-web
 
-volumes:
-  caddy_data:
-  caddy_config:
+networks:
+  edge:
+    external: true
+    name: edge

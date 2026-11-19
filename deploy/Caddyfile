@@ -1,4 +1,12 @@
-{$DOMAIN} {
+{
+	auto_https off
+	admin off
+	servers {
+		trusted_proxies static private_ranges
+	}
+}
+
+:80 {
 	encode gzip
 
 	@ws header Connection *Upgrade*
