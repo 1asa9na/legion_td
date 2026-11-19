@@ -7,9 +7,12 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "typecheck": "tsc --noEmit",
+    "test": "npm run build -w @legion/sim && node --experimental-strip-types --test src/board.test.ts",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@legion/content": "^0.0.0",
+    "@legion/sim": "^0.0.0",
     "@telegram-apps/sdk": "^3.11.8",
     "colyseus.js": "^0.16.22",
     "pixi.js": "^8.14.0",
