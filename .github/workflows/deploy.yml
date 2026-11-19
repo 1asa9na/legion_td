@@ -2,29 +2,52 @@ name: Deploy
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Check secrets
+        id: check
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+        run: |
+          if [ -z "$SSH_HOST" ]; then
+            echo "::warning::SSH_HOST is not set, deploy skipped"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          missing=()
+          [ -n "$SSH_USER" ] || missing+=("SSH_USER")
+          [ -n "$SSH_KEY" ] || missing+=("SSH_KEY")
+          if [ ${#missing[@]} -gt 0 ]; then
+            echo "::error::Repository secrets are missing: ${missing[*]}"
+            exit 1
+          fi
+
       - uses: actions/checkout@v4
+        if: steps.check.outputs.skip != 'true'
 
       - name: Configure SSH
+        if: steps.check.outputs.skip != 'true'
         env:
           SSH_KEY: ${{ secrets.SSH_KEY }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
         run: |
           mkdir -p ~/.ssh
           printf '%s\n' "$SSH_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+          ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts
 
       - name: Sync and restart
+        if: steps.check.outputs.skip != 'true'
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
-          DOMAIN: ${{ secrets.DOMAIN }}
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           WEBAPP_URL: ${{ secrets.WEBAPP_URL }}
         run: |
@@ -41,8 +64,10 @@ jobs:
             --exclude '(listfile)' \
             -e "ssh -i ~/.ssh/id_ed25519" \
             ./ "${SSH_USER}@${SSH_HOST}:legion-td/"
-          printf 'DOMAIN=%s\nBOT_TOKEN=%s\nWEBAPP_URL=%s\n' \
-            "$DOMAIN" "$BOT_TOKEN" "$WEBAPP_URL" > /tmp/legion.env
+          printf 'BOT_TOKEN=%s\nWEBAPP_URL=%s\n' \
+            "$BOT_TOKEN" "$WEBAPP_URL" > /tmp/legion.env
           scp -i ~/.ssh/id_ed25519 /tmp/legion.env "${SSH_USER}@${SSH_HOST}:legion-td/.env"
           ssh -i ~/.ssh/id_ed25519 "${SSH_USER}@${SSH_HOST}" \
-            "cd legion-td && docker compose --env-file .env -f deploy/docker-compose.yml up -d --build"
+            "docker network inspect edge >/dev/null 2>&1 || docker network create edge
+             if docker inspect caddy >/dev/null 2>&1; then docker network connect edge caddy >/dev/null 2>&1 || true; fi
+             cd legion-td && docker compose --env-file .env -f deploy/docker-compose.yml up -d --build"

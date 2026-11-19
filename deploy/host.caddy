@@ -1,0 +1,5 @@
+# One site for the Caddy that already listens on 443.
+# DNS for this name must point at the server before the first request.
+legion.bgylke8.online {
+	reverse_proxy legion-td-web:80
+}
