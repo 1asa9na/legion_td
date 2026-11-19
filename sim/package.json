@@ -11,8 +11,11 @@
   },
   "scripts": {
     "build": "tsc",
-    "typecheck": "tsc --noEmit",
-    "test": "npm run build && node --test dist/index.test.js"
+    "typecheck": "npm run build -w @legion/content && tsc --noEmit",
+    "test": "npm run build -w @legion/content && tsc && node --test dist/*.test.js"
+  },
+  "dependencies": {
+    "@legion/content": "0.0.0"
   },
   "devDependencies": {
     "@types/node": "^24.10.1",
