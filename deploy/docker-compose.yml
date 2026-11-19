@@ -3,15 +3,14 @@
 #   docker network connect edge <caddy-container>
 # and add deploy/host.caddy to its config. The web container is reachable there
 # as legion-td-web.
-# From the repo root, with .env filled from .env.example:
-#   docker compose --env-file .env -f deploy/docker-compose.yml up --build
+# Images are built in GitHub Actions. The server only pulls them.
+#   IMAGE_REPO=ghcr.io/1asa9na/legion_td IMAGE_TAG=<sha> \
+#     docker compose --env-file .env -f deploy/docker-compose.yml up -d
 name: legion-td
 
 services:
   server:
-    build:
-      context: ..
-      dockerfile: deploy/Dockerfile.server
+    image: ${IMAGE_REPO:?set IMAGE_REPO}/server:${IMAGE_TAG:?set IMAGE_TAG}
     environment:
       PORT: "2567"
       BOT_TOKEN: ${BOT_TOKEN:-}
@@ -32,9 +31,7 @@ services:
       retries: 5
 
   web:
-    build:
-      context: ..
-      dockerfile: deploy/Dockerfile.web
+    image: ${IMAGE_REPO}/web:${IMAGE_TAG}
     restart: unless-stopped
     expose:
       - "80"
