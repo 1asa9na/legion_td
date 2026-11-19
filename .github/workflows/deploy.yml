@@ -37,11 +37,20 @@ jobs:
         env:
           SSH_KEY: ${{ secrets.SSH_KEY }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
         run: |
           mkdir -p ~/.ssh
           printf '%s\n' "$SSH_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts
+          port="${SSH_PORT:-22}"
+          printf 'Host *\n  Port %s\n  IdentityFile ~/.ssh/id_ed25519\n  IdentitiesOnly yes\n' "$port" > ~/.ssh/config
+          chmod 600 ~/.ssh/config
+          # ssh-keyscan exits 1 when the port does not answer. Its own message
+          # contains the host and is hidden by secret masking, so say the port here.
+          if ! ssh-keyscan -T 15 -p "$port" -H "$SSH_HOST" >> ~/.ssh/known_hosts; then
+            echo "::error::ssh-keyscan got no host key on port ${port}. SSH_HOST must be the server IP (the same value as StoryMaker DEPLOY_HOST), not the site domain. If SSH is not on 22, set SSH_PORT."
+            exit 1
+          fi
 
       - name: Sync and restart
         if: steps.check.outputs.skip != 'true'
