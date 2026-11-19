@@ -3,6 +3,7 @@ export { ARMOR_CONSTANT, armorMultiplier, averageDamage, shotDamage } from "./co
 export {
   CELL_SIZE,
   LANE_SLOTS,
+  LEFT_LANE,
   OPENING_PREPARE_MS,
   SPAWN_HOLD_MS,
   canHit,
