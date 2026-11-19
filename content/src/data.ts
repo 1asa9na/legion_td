@@ -24,7 +24,10 @@ export const data: CatalogData = {
         "damageMin": 20,
         "damageMax": 21,
         "cooldown": 1.5,
-        "range": 90
+        "range": 90,
+        "moveSpeed": 0,
+        "collision": 16,
+        "acquire": 500
       }
     },
     {
@@ -44,7 +47,10 @@ export const data: CatalogData = {
         "damageMin": 83,
         "damageMax": 94,
         "cooldown": 1.3,
-        "range": 90
+        "range": 90,
+        "moveSpeed": 0,
+        "collision": 16,
+        "acquire": 500
       }
     },
     {
@@ -67,7 +73,10 @@ export const data: CatalogData = {
         "damageMin": 43,
         "damageMax": 56,
         "cooldown": 2.1,
-        "range": 600
+        "range": 600,
+        "moveSpeed": 0,
+        "collision": 16,
+        "acquire": 700
       }
     },
     {
@@ -87,7 +96,10 @@ export const data: CatalogData = {
         "damageMin": 48,
         "damageMax": 52,
         "cooldown": 0.5,
-        "range": 225
+        "range": 225,
+        "moveSpeed": 0,
+        "collision": 16,
+        "acquire": 700
       }
     },
     {
@@ -107,7 +119,10 @@ export const data: CatalogData = {
         "damageMin": 16,
         "damageMax": 18,
         "cooldown": 0.25,
-        "range": 800
+        "range": 800,
+        "moveSpeed": 0,
+        "collision": 16,
+        "acquire": 1000
       }
     },
     {
@@ -129,7 +144,10 @@ export const data: CatalogData = {
         "damageMin": 60,
         "damageMax": 72,
         "cooldown": 1.5,
-        "range": 90
+        "range": 90,
+        "moveSpeed": 0,
+        "collision": 16,
+        "acquire": 500
       }
     },
     {
@@ -149,7 +167,10 @@ export const data: CatalogData = {
         "damageMin": 153,
         "damageMax": 173,
         "cooldown": 1.7,
-        "range": 90
+        "range": 90,
+        "moveSpeed": 0,
+        "collision": 16,
+        "acquire": 500
       }
     },
     {
@@ -171,7 +192,10 @@ export const data: CatalogData = {
         "damageMin": 30,
         "damageMax": 44,
         "cooldown": 0.6,
-        "range": 250
+        "range": 250,
+        "moveSpeed": 0,
+        "collision": 16,
+        "acquire": 500
       }
     },
     {
@@ -191,7 +215,10 @@ export const data: CatalogData = {
         "damageMin": 263,
         "damageMax": 305,
         "cooldown": 2.1,
-        "range": 250
+        "range": 250,
+        "moveSpeed": 0,
+        "collision": 16,
+        "acquire": 500
       }
     },
     {
@@ -213,7 +240,10 @@ export const data: CatalogData = {
         "damageMin": 121,
         "damageMax": 135,
         "cooldown": 1.3,
-        "range": 180
+        "range": 180,
+        "moveSpeed": 0,
+        "collision": 16,
+        "acquire": 500
       }
     },
     {
@@ -233,7 +263,10 @@ export const data: CatalogData = {
         "damageMin": 156,
         "damageMax": 164,
         "cooldown": 0.9,
-        "range": 180
+        "range": 180,
+        "moveSpeed": 0,
+        "collision": 16,
+        "acquire": 500
       }
     },
     {
@@ -255,7 +288,10 @@ export const data: CatalogData = {
         "damageMin": 133,
         "damageMax": 149,
         "cooldown": 0.9,
-        "range": 450
+        "range": 450,
+        "moveSpeed": 0,
+        "collision": 16,
+        "acquire": 700
       }
     },
     {
@@ -275,7 +311,10 @@ export const data: CatalogData = {
         "damageMin": 276,
         "damageMax": 326,
         "cooldown": 0.9,
-        "range": 450
+        "range": 450,
+        "moveSpeed": 0,
+        "collision": 16,
+        "acquire": 700
       }
     }
   ],
@@ -291,7 +330,10 @@ export const data: CatalogData = {
         "damageMin": 3,
         "damageMax": 4,
         "cooldown": 1.25,
-        "range": 90
+        "range": 90,
+        "moveSpeed": 225,
+        "collision": 12,
+        "acquire": 600
       }
     },
     "h000": {
@@ -305,7 +347,10 @@ export const data: CatalogData = {
         "damageMin": 3,
         "damageMax": 5,
         "cooldown": 1,
-        "range": 90
+        "range": 90,
+        "moveSpeed": 275,
+        "collision": 12,
+        "acquire": 600
       }
     },
     "h005": {
@@ -319,7 +364,10 @@ export const data: CatalogData = {
         "damageMin": 6,
         "damageMax": 8,
         "cooldown": 1.1,
-        "range": 90
+        "range": 90,
+        "moveSpeed": 325,
+        "collision": 12,
+        "acquire": 600
       }
     },
     "h001": {
@@ -333,7 +381,10 @@ export const data: CatalogData = {
         "damageMin": 5,
         "damageMax": 7,
         "cooldown": 0.9,
-        "range": 400
+        "range": 400,
+        "moveSpeed": 300,
+        "collision": 12,
+        "acquire": 600
       }
     },
     "h00I": {
@@ -347,7 +398,10 @@ export const data: CatalogData = {
         "damageMin": 8,
         "damageMax": 10,
         "cooldown": 0.8,
-        "range": 90
+        "range": 90,
+        "moveSpeed": 350,
+        "collision": 5,
+        "acquire": 600
       }
     },
     "h003": {
@@ -361,7 +415,10 @@ export const data: CatalogData = {
         "damageMin": 19,
         "damageMax": 20,
         "cooldown": 1.4,
-        "range": 90
+        "range": 90,
+        "moveSpeed": 300,
+        "collision": 18,
+        "acquire": 600
       }
     },
     "h004": {
@@ -375,7 +432,10 @@ export const data: CatalogData = {
         "damageMin": 25,
         "damageMax": 27,
         "cooldown": 1.2,
-        "range": 90
+        "range": 90,
+        "moveSpeed": 375,
+        "collision": 12,
+        "acquire": 600
       }
     },
     "h007": {
@@ -389,7 +449,10 @@ export const data: CatalogData = {
         "damageMin": 13,
         "damageMax": 17,
         "cooldown": 1,
-        "range": 400
+        "range": 400,
+        "moveSpeed": 300,
+        "collision": 12,
+        "acquire": 600
       }
     },
     "h008": {
@@ -403,7 +466,10 @@ export const data: CatalogData = {
         "damageMin": 22,
         "damageMax": 24,
         "cooldown": 1.2,
-        "range": 90
+        "range": 90,
+        "moveSpeed": 225,
+        "collision": 18,
+        "acquire": 600
       }
     },
     "H05I": {
@@ -417,7 +483,10 @@ export const data: CatalogData = {
         "damageMin": 153,
         "damageMax": 189,
         "cooldown": 0.7,
-        "range": 100
+        "range": 100,
+        "moveSpeed": 200,
+        "collision": 48,
+        "acquire": 500
       }
     },
     "h00A": {
@@ -431,7 +500,10 @@ export const data: CatalogData = {
         "damageMin": 15,
         "damageMax": 17,
         "cooldown": 0.8,
-        "range": 90
+        "range": 90,
+        "moveSpeed": 325,
+        "collision": 12,
+        "acquire": 600
       }
     },
     "h00B": {
@@ -445,7 +517,10 @@ export const data: CatalogData = {
         "damageMin": 16,
         "damageMax": 18,
         "cooldown": 0.8,
-        "range": 400
+        "range": 400,
+        "moveSpeed": 350,
+        "collision": 24,
+        "acquire": 600
       }
     },
     "h00C": {
@@ -459,7 +534,10 @@ export const data: CatalogData = {
         "damageMin": 30,
         "damageMax": 33,
         "cooldown": 1,
-        "range": 90
+        "range": 90,
+        "moveSpeed": 375,
+        "collision": 5,
+        "acquire": 600
       }
     },
     "h00D": {
@@ -473,7 +551,10 @@ export const data: CatalogData = {
         "damageMin": 82,
         "damageMax": 86,
         "cooldown": 1.2,
-        "range": 90
+        "range": 90,
+        "moveSpeed": 350,
+        "collision": 18,
+        "acquire": 600
       }
     },
     "h00E": {
@@ -487,7 +568,10 @@ export const data: CatalogData = {
         "damageMin": 74,
         "damageMax": 84,
         "cooldown": 1.5,
-        "range": 90
+        "range": 90,
+        "moveSpeed": 375,
+        "collision": 24,
+        "acquire": 600
       }
     },
     "h00F": {
@@ -501,7 +585,10 @@ export const data: CatalogData = {
         "damageMin": 34,
         "damageMax": 40,
         "cooldown": 1.1,
-        "range": 400
+        "range": 400,
+        "moveSpeed": 325,
+        "collision": 24,
+        "acquire": 600
       }
     },
     "h00G": {
@@ -515,7 +602,10 @@ export const data: CatalogData = {
         "damageMin": 84,
         "damageMax": 88,
         "cooldown": 1.4,
-        "range": 90
+        "range": 90,
+        "moveSpeed": 325,
+        "collision": 24,
+        "acquire": 600
       }
     },
     "h00H": {
@@ -529,7 +619,10 @@ export const data: CatalogData = {
         "damageMin": 47,
         "damageMax": 54,
         "cooldown": 0.9,
-        "range": 90
+        "range": 90,
+        "moveSpeed": 300,
+        "collision": 18,
+        "acquire": 600
       }
     },
     "h00J": {
@@ -543,7 +636,10 @@ export const data: CatalogData = {
         "damageMin": 63,
         "damageMax": 66,
         "cooldown": 0.9,
-        "range": 90
+        "range": 90,
+        "moveSpeed": 350,
+        "collision": 18,
+        "acquire": 600
       }
     },
     "H05J": {
@@ -557,7 +653,10 @@ export const data: CatalogData = {
         "damageMin": 186,
         "damageMax": 221,
         "cooldown": 0.51,
-        "range": 400
+        "range": 400,
+        "moveSpeed": 350,
+        "collision": 64,
+        "acquire": 600
       }
     },
     "h03P": {
@@ -571,7 +670,10 @@ export const data: CatalogData = {
         "damageMin": 53,
         "damageMax": 60,
         "cooldown": 0.7,
-        "range": 90
+        "range": 90,
+        "moveSpeed": 350,
+        "collision": 5,
+        "acquire": 600
       }
     },
     "h03Q": {
@@ -585,7 +687,10 @@ export const data: CatalogData = {
         "damageMin": 99,
         "damageMax": 108,
         "cooldown": 1.5,
-        "range": 90
+        "range": 90,
+        "moveSpeed": 275,
+        "collision": 28,
+        "acquire": 600
       }
     },
     "h03R": {
@@ -599,7 +704,10 @@ export const data: CatalogData = {
         "damageMin": 116,
         "damageMax": 128,
         "cooldown": 1.2,
-        "range": 90
+        "range": 90,
+        "moveSpeed": 350,
+        "collision": 24,
+        "acquire": 600
       }
     },
     "h03T": {
@@ -613,7 +721,10 @@ export const data: CatalogData = {
         "damageMin": 89,
         "damageMax": 99,
         "cooldown": 1.2,
-        "range": 400
+        "range": 400,
+        "moveSpeed": 330,
+        "collision": 18,
+        "acquire": 600
       }
     },
     "h03U": {
@@ -627,7 +738,10 @@ export const data: CatalogData = {
         "damageMin": 76,
         "damageMax": 82,
         "cooldown": 1,
-        "range": 90
+        "range": 90,
+        "moveSpeed": 420,
+        "collision": 18,
+        "acquire": 600
       }
     },
     "h03S": {
@@ -641,7 +755,10 @@ export const data: CatalogData = {
         "damageMin": 158,
         "damageMax": 168,
         "cooldown": 1.3,
-        "range": 90
+        "range": 90,
+        "moveSpeed": 375,
+        "collision": 20,
+        "acquire": 600
       }
     },
     "h03V": {
@@ -655,7 +772,10 @@ export const data: CatalogData = {
         "damageMin": 128,
         "damageMax": 136,
         "cooldown": 1,
-        "range": 90
+        "range": 90,
+        "moveSpeed": 400,
+        "collision": 24,
+        "acquire": 600
       }
     },
     "h03W": {
@@ -669,7 +789,10 @@ export const data: CatalogData = {
         "damageMin": 167,
         "damageMax": 187,
         "cooldown": 0.8,
-        "range": 400
+        "range": 400,
+        "moveSpeed": 325,
+        "collision": 36,
+        "acquire": 600
       }
     },
     "h006": {
@@ -683,7 +806,10 @@ export const data: CatalogData = {
         "damageMin": 210,
         "damageMax": 230,
         "cooldown": 1.3,
-        "range": 300
+        "range": 300,
+        "moveSpeed": 350,
+        "collision": 5,
+        "acquire": 600
       }
     },
     "H05K": {
@@ -697,7 +823,10 @@ export const data: CatalogData = {
         "damageMin": 736,
         "damageMax": 802,
         "cooldown": 0.45,
-        "range": 100
+        "range": 100,
+        "moveSpeed": 400,
+        "collision": 64,
+        "acquire": 500
       }
     },
     "h05L": {
@@ -711,7 +840,10 @@ export const data: CatalogData = {
         "damageMin": 248,
         "damageMax": 269,
         "cooldown": 1,
-        "range": 225
+        "range": 225,
+        "moveSpeed": 400,
+        "collision": 36,
+        "acquire": 600
       }
     }
   },
@@ -1114,5 +1246,22 @@ export const data: CatalogData = {
     "bounty": 0,
     "attackType": "chaos",
     "armorType": "unarmored"
+  },
+  "king": {
+    "id": "h00K",
+    "name": "The King",
+    "stats": {
+      "hp": 2600,
+      "armor": 5,
+      "armorType": "hero",
+      "attackType": "hero",
+      "damageMin": 31,
+      "damageMax": 41,
+      "cooldown": 0.9,
+      "range": 715,
+      "moveSpeed": 1,
+      "collision": 16,
+      "acquire": 750
+    }
   }
 };

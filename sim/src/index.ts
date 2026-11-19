@@ -2,10 +2,10 @@ export { SIM_TICK_HZ, TICK_MS } from "./clock.js";
 export { ARMOR_CONSTANT, armorMultiplier, averageDamage, shotDamage } from "./combat.js";
 export {
   CELL_SIZE,
-  DEFAULT_CREEP_SPEED,
   LANE_SLOTS,
-  SPAWN_INTERVAL_MS,
-  inRange,
+  OPENING_PREPARE_MS,
+  SPAWN_HOLD_MS,
+  canHit,
   pathLength,
   towerPosition,
 } from "./lane.js";

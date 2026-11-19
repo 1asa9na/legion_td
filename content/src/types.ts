@@ -25,6 +25,9 @@ export interface CombatStats {
   damageMax: number;
   cooldown: number;
   range: number;
+  moveSpeed: number;
+  collision: number;
+  acquire: number;
 }
 
 export interface Tower {
@@ -59,6 +62,12 @@ export interface Wave {
   ranged: boolean;
 }
 
+export interface King {
+  id: string;
+  name: string;
+  stats: CombatStats;
+}
+
 export interface BonusWave {
   level: number;
   creepId: string;
@@ -75,4 +84,5 @@ export interface CatalogData {
   creeps: Record<string, Creep>;
   waves: Wave[];
   bonus: BonusWave;
+  king: King;
 }

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { bonusWave, creeps, damageBonus, damageMultiplier, mech, waves } from "./index.js";
+import { bonusWave, creeps, damageBonus, damageMultiplier, king, mech, waves } from "./index.js";
 
 // Strings from Trig_Setup_Tower_Properties and Trig_Setup_Creep_Properties.
 const SELL_LIST = ",25,150,60,230,215,110,300,140,405,210,500,360,850";
@@ -119,4 +119,20 @@ test("armor table matches war3mapMisc", () => {
   assert.equal(damageMultiplier("pierce", "light"), 1.3);
   assert.equal(damageMultiplier("siege", "fortified"), 1.25);
   assert.equal(damageMultiplier("normal", "unarmored"), 1);
+});
+
+test("movement and the king come from the unit data", () => {
+  const crab = creeps[waves[0].creepId];
+  assert.equal(crab.stats.moveSpeed, 225);
+  assert.equal(crab.stats.collision, 12);
+  assert.equal(crab.stats.acquire, 600);
+  assert.equal(king.id, "h00K");
+  assert.equal(king.name, "The King");
+  assert.equal(king.stats.hp, 2600);
+  assert.equal(king.stats.armor, 5);
+  assert.equal(king.stats.armorType, "hero");
+  assert.equal(king.stats.attackType, "hero");
+  assert.equal(king.stats.range, 715);
+  assert.equal(king.stats.damageMin, 31);
+  assert.equal(king.stats.damageMax, 41);
 });
