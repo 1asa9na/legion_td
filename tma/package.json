@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
-    "typecheck": "tsc --noEmit",
+    "build": "npm run build -w @legion/sim && tsc --noEmit && vite build",
+    "typecheck": "npm run build -w @legion/sim && tsc --noEmit",
     "test": "npm run build -w @legion/sim && node --experimental-strip-types --test src/board.test.ts",
     "preview": "vite preview"
   },
