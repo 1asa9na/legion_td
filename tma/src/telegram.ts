@@ -3,13 +3,14 @@ import { init, initData, miniApp, viewport } from "@telegram-apps/sdk";
 export interface ShellStatus {
   insideTelegram: boolean;
   userLabel: string | null;
+  initData: string | null;
 }
 
 export async function bootTelegram(): Promise<ShellStatus> {
   try {
     init();
   } catch {
-    return { insideTelegram: false, userLabel: null };
+    return { insideTelegram: false, userLabel: null, initData: null };
   }
 
   if (miniApp.mountSync.isAvailable()) {
@@ -31,5 +32,5 @@ export async function bootTelegram(): Promise<ShellStatus> {
 
   const user = initData.user();
   const userLabel = user?.username ? `@${user.username}` : (user?.first_name ?? null);
-  return { insideTelegram: true, userLabel };
+  return { insideTelegram: true, userLabel, initData: initData.raw() ?? null };
 }

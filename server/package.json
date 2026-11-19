@@ -5,12 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "tsc",
-    "typecheck": "tsc --noEmit",
+    "build": "npm run build -w @legion/sim && tsc",
+    "typecheck": "npm run build -w @legion/sim && tsc --noEmit",
+    "test": "npm run build -w @legion/sim && tsc && node --test dist/*.test.js",
     "start": "node dist/index.js"
   },
   "dependencies": {
     "@colyseus/ws-transport": "^0.16.5",
+    "@legion/sim": "0.0.0",
     "colyseus": "^0.16.5",
     "express": "^5.1.0",
     "grammy": "^1.38.2"
@@ -18,6 +20,7 @@
   "devDependencies": {
     "@types/express": "^5.0.3",
     "@types/node": "^24.10.1",
+    "colyseus.js": "^0.16.22",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3"
   }
