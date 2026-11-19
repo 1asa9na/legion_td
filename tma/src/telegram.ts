@@ -13,6 +13,13 @@ export async function bootTelegram(): Promise<ShellStatus> {
     return { insideTelegram: false, userLabel: null, initData: null };
   }
 
+  // init() only opens the bridge. The signed payload stays empty until restore().
+  try {
+    initData.restore();
+  } catch {
+    return { insideTelegram: true, userLabel: null, initData: null };
+  }
+
   if (miniApp.mountSync.isAvailable()) {
     miniApp.mountSync();
   }
