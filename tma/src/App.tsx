@@ -1,26 +1,47 @@
 import { useEffect, useRef, useState } from "react";
 import { mountLane } from "./lane";
+import { joinMatch } from "./room";
 import { bootTelegram, type ShellStatus } from "./telegram";
 
 type Health = "unknown" | "up" | "down";
+type RoomStatus = "browser" | "joining" | "open" | "denied";
 
 export function App() {
   const hostRef = useRef<HTMLDivElement>(null);
   const [shell, setShell] = useState<ShellStatus>({
     insideTelegram: false,
     userLabel: null,
+    initData: null,
   });
   const [health, setHealth] = useState<Health>("unknown");
+  const [room, setRoom] = useState<RoomStatus>("browser");
 
   useEffect(() => {
     let cancel = false;
-    bootTelegram().then((status) => {
-      if (!cancel) {
-        setShell(status);
+    let leave = () => {};
+    bootTelegram().then(async (status) => {
+      if (cancel) return;
+      setShell(status);
+      if (!status.initData) {
+        setRoom(status.insideTelegram ? "denied" : "browser");
+        return;
+      }
+      setRoom("joining");
+      try {
+        const connection = await joinMatch(status.initData);
+        if (cancel) {
+          connection.leave();
+          return;
+        }
+        leave = connection.leave;
+        setRoom("open");
+      } catch {
+        if (!cancel) setRoom("denied");
       }
     });
     return () => {
       cancel = true;
+      leave();
     };
   }, []);
 
@@ -71,6 +92,8 @@ export function App() {
     : "браузер, открой из меню бота";
   const serverLine =
     health === "up" ? "на связи" : health === "down" ? "не запущен" : "проверка";
+  const roomLine =
+    room === "open" ? "в матче" : room === "joining" ? "вход" : room === "denied" ? "нет входа" : "из бота";
 
   return (
     <div className="app">
@@ -80,6 +103,7 @@ export function App() {
         <h1>Каркас</h1>
         <p>{telegramLine}</p>
         <p>Сервер: {serverLine}</p>
+        <p>Комната: {roomLine}</p>
       </header>
     </div>
   );

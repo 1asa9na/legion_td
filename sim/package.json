@@ -10,7 +10,7 @@
     }
   },
   "scripts": {
-    "build": "tsc",
+    "build": "npm run build -w @legion/content && tsc",
     "typecheck": "npm run build -w @legion/content && tsc --noEmit",
     "test": "npm run build -w @legion/content && tsc && node --test dist/*.test.js"
   },
