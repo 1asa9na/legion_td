@@ -5,10 +5,10 @@
     "node": ">=22"
   },
   "workspaces": [
+    "content",
     "sim",
     "server",
-    "tma",
-    "content"
+    "tma"
   ],
   "scripts": {
     "dev": "npm run dev -w @legion/tma",

@@ -16,6 +16,8 @@ import sys
 from pathlib import Path
 
 # Vanilla rows for the base units this map's custom units inherit from.
+# Vanilla rows for the base units this map's custom units inherit from.
+# move, collision and acquire are filled in only when the map leaves the field empty.
 STOCK = {
     "hfoo": {
         "dmgplus1": 11,
@@ -27,6 +29,9 @@ STOCK = {
         "def": 2,
         "defType": "large",
         "HP": 420,
+        "move": 270,
+        "collision": 16,
+        "acquire": 600,
     },
     "hgtw": {
         "dmgplus1": 22,
@@ -38,6 +43,9 @@ STOCK = {
         "def": 5,
         "defType": "large",
         "HP": 500,
+        "move": 0,
+        "collision": 16,
+        "acquire": 700,
     },
     "hrif": {
         "dmgplus1": 16,
@@ -49,6 +57,9 @@ STOCK = {
         "def": 0,
         "defType": "medium",
         "HP": 520,
+        "move": 270,
+        "collision": 16,
+        "acquire": 600,
     },
     "hdhw": {
         "dmgplus1": 18,
@@ -60,6 +71,9 @@ STOCK = {
         "def": 1,
         "defType": "small",
         "HP": 575,
+        "move": 270,
+        "collision": 16,
+        "acquire": 600,
     },
     "Hpal": {
         "dmgplus1": 0,
@@ -71,6 +85,24 @@ STOCK = {
         "def": 2,
         "defType": "hero",
         "HP": 100,
+        "move": 270,
+        "collision": 32,
+        "acquire": 500,
+    },
+    # The left and right kings are a modified watch tower. Defense is not overridden.
+    "hwtw": {
+        "dmgplus1": 20,
+        "dice1": 1,
+        "sides1": 6,
+        "cool1": 0.9,
+        "rangeN1": 700,
+        "atkType1": "pierce",
+        "def": 5,
+        "defType": "fort",
+        "HP": 500,
+        "move": 0,
+        "collision": 16,
+        "acquire": 700,
     },
 }
 
@@ -96,6 +128,9 @@ FIELD = {
     "udef": "def",
     "udty": "defType",
     "uhpm": "HP",
+    "umvs": "move",
+    "ucol": "collision",
+    "uacq": "acquire",
 }
 
 
@@ -227,6 +262,9 @@ def combat(base: str, mods: dict) -> dict:
         "damageMax": damage_base + dice * sides,
         "cooldown": number(float(merged["cool1"])),
         "range": number(float(merged["rangeN1"])),
+        "moveSpeed": number(float(merged["move"])),
+        "collision": number(float(merged["collision"])),
+        "acquire": number(float(merged["acquire"])),
     }
 
 
@@ -391,6 +429,13 @@ def main() -> None:
             }
         )
 
+    king_base, king_mods = units["h00K"]
+    king = {
+        "id": "h00K",
+        "name": string_value(strings, king_mods, "unam"),
+        "stats": combat(king_base, king_mods),
+    }
+
     bonus = {
         "level": 31,
         "creepId": bonus_id,
@@ -407,6 +452,7 @@ def main() -> None:
         "creeps": creeps,
         "waves": waves,
         "bonus": bonus,
+        "king": king,
     }
     out = Path(__file__).resolve().parents[1] / "content" / "src" / "data.ts"
     out.write_text(render(payload), encoding="utf-8")

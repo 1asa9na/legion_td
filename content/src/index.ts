@@ -4,6 +4,7 @@ export type {
   BonusWave,
   CombatStats,
   Creep,
+  King,
   Tower,
   Wave,
 } from "./types.js";
@@ -20,6 +21,7 @@ export const mech = {
 export const waves = data.waves;
 export const bonusWave = data.bonus;
 export const creeps = data.creeps;
+export const king = data.king;
 
 export const catalog = {
   race: mech.id,
@@ -28,4 +30,5 @@ export const catalog = {
   waves,
   bonusWave,
   creeps,
+  king,
 };
